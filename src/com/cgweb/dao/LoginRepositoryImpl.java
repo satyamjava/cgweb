@@ -67,45 +67,4 @@ public class LoginRepositoryImpl implements LoginRepository {
 			return "No User Found";
 		}*/
 	}
-	
-	/*
-	public Payee find(Payee payee)
-	{
-		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-
-		CriteriaQuery <Payee> criteriaQuery = criteriaBuilder.createQuery(Payee.class);
-		Root from;
-
-		if (payee instanceof BpayPayee)
-		{
-			BpayPayee bpayPayee = (BpayPayee)payee;
-			from = criteriaQuery.from(BpayPayee.class);
-			Join <BpayPayee, BpayBiller> biller = from.join("biller");
-
-			criteriaQuery.where(criteriaBuilder.equal(from.get("cashAccountId"), bpayPayee.getCashAccountId()),
-				criteriaBuilder.equal(biller.get("billerCode"), bpayPayee.getBiller().getBillerCode()),
-				criteriaBuilder.equal(from.get("customerReference"), bpayPayee.getCustomerReference()));
-		}
-		else
-		{
-			PayAnyonePayee bpayPayee = (PayAnyonePayee)payee;
-			from = criteriaQuery.from(PayAnyonePayee.class);
-			Join <BpayPayee, Bsb> bsb = from.join("bsb");
-
-			criteriaQuery.where(criteriaBuilder.equal(from.get("cashAccountId"), bpayPayee.getCashAccountId()),
-				criteriaBuilder.equal(bsb.get("bsbCode"), bpayPayee.getBsb().getBsbCode()),
-				criteriaBuilder.equal(from.get("accountNumber"), bpayPayee.getAccountNumber()));
-		}
-
-		CriteriaQuery <Payee> select = criteriaQuery.select(from);
-		TypedQuery <Payee> typedQuery = entityManager.createQuery(select);
-		List <Payee> resultList = typedQuery.getResultList();
-
-		if (resultList.size() >= 1)
-		{
-			return resultList.iterator().next();
-		}
-
-		return null;
-	}*/
 }
