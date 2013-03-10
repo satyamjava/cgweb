@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+		   targetNamespace="http://www.springwscgweb.org/users" 
+		   xmlns:tns="http://www.springwscgweb.org/users" 
+		   elementFormDefault="qualified">
+
+
+<import schemaLocation="service.xsd" namespace="http://www.springwscgweb.org/types"/>
+		
+<!--		   
+<xs:element name="user-request" type="types:id" />
+  <xs:element name="user-response" type="types:data" />
+  <xs:element name="id" type="xs:String" />
+-->		   
+<element name="userRequest">
+  <complexType>
+    <sequence>
+      <element name="userId" type="string"/>
+    </sequence>
+  </complexType>
+</element>
+
+<element name="userResponse">
+  <complexType>
+    <sequence>
+      <element name="userName" type="string"/>
+      <element name="entity" type="string"/>
+      <element name="first_name" type="string"/>
+        <element name="middle_name" type="string"/>
+        <element name="last_name" type="string"/>
+        <element name="primary_contact_number" type="string"/>
+        <element name="secondary_contact_number" type="string"/>
+        <element name="contact_number" type="string"/>
+        <element name="email_id" type="string"/>
+        <element name="designation" type="string"/>
+        <element name="gender" type="string"/>
+        <element name="address_id" type="string"/>
+        <element name="pic" type="string"/>
+        <element name="contact_list_id" type="string"/>
+        <element name="USER_ID" type="string"/>
+        <element name="SECONDRY_CONTACT_NUMBER" type="string"/>
+    </sequence>
+  </complexType>
+</element>
+</schema>

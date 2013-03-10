@@ -3,7 +3,7 @@
  */
 package com.cgweb.service;
 
-import com.cgweb.domain.UserInfo;
+import com.cgweb.domain.UserLogin;
 
 /**
  * @author SATYAM
@@ -11,6 +11,6 @@ import com.cgweb.domain.UserInfo;
  */
 public interface LoginService {
 	
-	UserInfo getUserInfo(String userName, String password);
+	UserLogin getUserLogin(String userName, String password);
 
 }

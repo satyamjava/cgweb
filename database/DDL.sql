@@ -12,3 +12,4 @@ alter table `addressbook`.`user_info` add column `contact_list_id` varchar (100)
 
 CREATE TABLE `company_info` (  `company_id` INT(10) NOT NULL,  `company_name` VARCHAR(150) NOT NULL,  `address_id` INT(10) NOT NULL,  `establishment_year` VARCHAR(50) NOT NULL ) COMMENT='Contains the details of organization' COLLATE='latin1_swedish_ci' ENGINE=InnoDB ROW_FORMAT=DEFAULT AUTO_INCREMENT=1;
 
+alter table `addressbook`.`user_login` change `password` `user_password` varchar (50)   NOT NULL  COLLATE latin1_swedish_ci 

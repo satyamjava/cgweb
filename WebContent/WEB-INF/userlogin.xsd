@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="data">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="row"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="row">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="user_name"/>
+        <xs:element ref="password"/>
+        <xs:element ref="role"/>
+        <xs:element ref="user_id"/>
+        <xs:element ref="user_seq"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="user_name" type="xs:NCName"/>
+  <xs:element name="password" type="xs:NCName"/>
+  <xs:element name="role" type="xs:NCName"/>
+  <xs:element name="user_id" type="xs:string"/>
+  <xs:element name="user_seq" type="xs:integer"/>
+</xs:schema>

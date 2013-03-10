@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="data">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="row"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="row">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="company_id"/>
+        <xs:element ref="company_name"/>
+        <xs:element ref="address_id"/>
+        <xs:element ref="establishment_year"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="company_id" type="xs:integer"/>
+  <xs:element name="company_name" type="xs:string"/>
+  <xs:element name="address_id" type="xs:integer"/>
+  <xs:element name="establishment_year" type="xs:integer"/>
+</xs:schema>

@@ -3,7 +3,7 @@
  */
 package com.cgweb.dao;
 
-import com.cgweb.domain.UserInfo;
+import com.cgweb.domain.UserLogin;
 
 /**
  * @author SATYAM
@@ -11,6 +11,6 @@ import com.cgweb.domain.UserInfo;
  */
 public interface LoginRepository {
 	
-	public UserInfo authenticateUser(String username, String password);
+	public UserLogin authenticateUser(String username, String password);
 
 }

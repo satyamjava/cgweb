@@ -12,7 +12,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.cgweb.domain.UserInfo;
+import com.cgweb.domain.UserLogin;
 import com.cgweb.service.LoginService;
 import com.cgweb.service.LoginServiceImpl;
 
@@ -53,23 +53,27 @@ public class LoginEndpoint {
     	System.out.println("LoginEndpoint.processOrder() userName:"+userName);
     	System.out.println("LoginEndpoint.processOrder() password:"+password);
     	
-    	UserInfo userInfo = loginService.getUserInfo(userName, password);
-    	System.out.println("LoginEndpoint.processOrder() userInfo :"+ userInfo);
+    	UserLogin userLogin = loginService.getUserLogin(userName, password);
+    	System.out.println("LoginEndpoint.processOrder() userInfo :"+ userLogin);
     	String firstName = "";
-    	if(userInfo != null)
+    	Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+        Element response = document.createElementNS(NAMESPACE, "loginResponse");
+            	
+    	if(userLogin != null)
     	{
-    		System.out.println("LoginEndpoint.processOrder() userInfo :"+userInfo.getFirstName());
-    		firstName = userInfo.getFirstName();
+    		System.out.println("LoginEndpoint.processOrder() userInfo :"+userLogin.getUserName());
+    		firstName = userLogin.getUserName();
+    		response.appendChild(addElementWithValue(document, "userName", firstName));
+            response.appendChild(addElementWithValue(document, "entity", "2"));
+
     	}
     	else
     	{
     		firstName = "User Not Found";
+    		response.appendChild(addElementWithValue(document, "userName", firstName));
+            response.appendChild(addElementWithValue(document, "entity", "2"));
     	}
     	
-        Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-        Element response = document.createElementNS(NAMESPACE, "loginResponse");
-        response.appendChild(addElementWithValue(document, "userName", firstName));
-        response.appendChild(addElementWithValue(document, "entity", "2"));
         return response;
     }
     

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.cgweb.dao.LoginRepository;
 import com.cgweb.dao.LoginRepositoryImpl;
-import com.cgweb.domain.UserInfo;
+import com.cgweb.domain.UserLogin;
 
 /**
  * @author SATYAM
@@ -26,12 +26,12 @@ public class LoginServiceImpl implements LoginService {
     }
 
 	@Override
-	public UserInfo getUserInfo(String userName, String password) {
+	public UserLogin getUserLogin(String userName, String password) {
 		
-    	UserInfo userInfo = loginRepository.authenticateUser(userName, password);
-    	if(userInfo != null)
+    	UserLogin UserLogin = loginRepository.authenticateUser(userName, password);
+    	if(UserLogin != null)
     	{
-    		System.out.println("LoginEndpoint.processOrder():"+userInfo.getFirstName());
+    		System.out.println("LoginEndpoint.processOrder():"+UserLogin.getUserName());
     	}
     	
 		return null;

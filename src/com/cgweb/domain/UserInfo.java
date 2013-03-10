@@ -2,22 +2,22 @@ package com.cgweb.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "USER_INFO")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class UserInfo implements Serializable {
+public class UserInfo implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -25,7 +25,7 @@ public abstract class UserInfo implements Serializable {
 		@Column(name = "USER_ID")
 		@GeneratedValue(strategy = GenerationType.AUTO, generator = "USER_ID")
 		@SequenceGenerator(name = "USER_ID", sequenceName = "USER_ID")
-		private String id;
+		private int id;
 
 		@Column(name = "FIRST_NAME")
 		private String firstName;
@@ -37,13 +37,13 @@ public abstract class UserInfo implements Serializable {
 		private String lastName;
 
 		@Column(name = "PRIMARY_CONTACT_NUMBER")
-		private long primaryContactNumber;
+		private String primaryContactNumber;
 		
-		@Column(name = "SECONDRY_CONTACT_NUMBER")
-		private long secondryContactNumber;
+		@Column(name = "SECONDARY_CONTACT_NUMBER")
+		private String secondaryContactNumber;
 		
 		@Column(name = "CONTACT_NUMBER")
-		private long contactNumber;
+		private String contactNumber;
 
 		@Column(name = "email_id")
 		private String emailId;
@@ -52,15 +52,16 @@ public abstract class UserInfo implements Serializable {
 		private String designation;
 		
 		@Column(name = "gender")
-		private char gender;
+		private String gender;
 		
 		@Column(name = "contact_list_id")
 		private String contactListId;
 		
-		@Column(name = "ADDRESS_ID")
-		private String addressId;
+		//@Column(name = "ADDRESS_ID")
+		@ManyToOne(cascade = CascadeType.ALL)
+		private Address address;
 
-		public UserInfo(String firstName, String lastName, long primaryContactNumber)
+		public UserInfo(String firstName, String lastName, String primaryContactNumber)
 		{
 			this();
 			this.firstName = firstName;
@@ -73,28 +74,33 @@ public abstract class UserInfo implements Serializable {
 			this();
 			this.firstName = firstName;
 		}
+		
+		public UserInfo(Address address)
+		{
+			this.address = address;
+		}
 
 		public UserInfo()
 		{
 			super();
 		}
 
-		public String getId()
+		public int getId()
 		{
 			return id;
 		}
 
-		public void setId(String id)
+		public void setId(int id)
 		{
 			this.id = id;
 		}
 
-		public String getAddressId() {
-			return addressId;
+		public Address getAddress() {
+			return address;
 		}
 
-		public void setAddressId(String addressId) {
-			this.addressId = addressId;
+		public void setAddress(Address address) {
+			this.address = address;
 		}
 
 		public String getFirstName() {
@@ -121,27 +127,27 @@ public abstract class UserInfo implements Serializable {
 			this.lastName = lastName;
 		}
 
-		public long getPrimaryContactNumber() {
+		public String getPrimaryContactNumber() {
 			return primaryContactNumber;
 		}
 
-		public void setPrimaryContactNumber(long primaryContactNumber) {
+		public void setPrimaryContactNumber(String primaryContactNumber) {
 			this.primaryContactNumber = primaryContactNumber;
 		}
 
-		public long getSecondryContactNumber() {
-			return secondryContactNumber;
+		public String getSecondaryContactNumber() {
+			return secondaryContactNumber;
 		}
 
-		public void setSecondryContactNumber(long secondryContactNumber) {
-			this.secondryContactNumber = secondryContactNumber;
+		public void setSecondaryContactNumber(String secondaryContactNumber) {
+			this.secondaryContactNumber = secondaryContactNumber;
 		}
 
-		public long getContactNumber() {
+		public String getContactNumber() {
 			return contactNumber;
 		}
 
-		public void setContactNumber(long contactNumber) {
+		public void setContactNumber(String contactNumber) {
 			this.contactNumber = contactNumber;
 		}
 
@@ -161,11 +167,11 @@ public abstract class UserInfo implements Serializable {
 			this.designation = designation;
 		}
 
-		public char getGender() {
+		public String getGender() {
 			return gender;
 		}
 
-		public void setGender(char gender) {
+		public void setGender(String gender) {
 			this.gender = gender;
 		}
 

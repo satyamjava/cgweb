@@ -16,8 +16,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "User_Login")
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class UserLogin implements Serializable {
+//@Inheritance(strategy = InheritanceType.JOINED)
+public class UserLogin implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -25,22 +25,21 @@ public abstract class UserLogin implements Serializable {
 		@Column(name = "USER_SEQ")
 		@GeneratedValue(strategy = GenerationType.AUTO, generator = "USER_SEQ")
 		@SequenceGenerator(name = "USER_SEQ", sequenceName = "USER_SEQ")
-		private String id;
+		private int id;
 
-		@Column(name = "PASSWORD")
+		@Column(name = "USER_PASSWORD")
 		private String password;
 
 		@Column(name = "USER_NAME")
 		private String userName;
 
 		@Column(name = "ROLE")
-		@Enumerated(EnumType.STRING)
-		private Role role;
+		private String role;
 
 		@Column(name = "USER_ID")
 		private String userId;
 
-		public UserLogin(String userName, String password, Role role, String userId)
+		public UserLogin(String userName, String password, String role, String userId)
 		{
 			this();
 			this.userName = userName;
@@ -49,7 +48,7 @@ public abstract class UserLogin implements Serializable {
 			this.userId = userId;
 		}
 
-		public UserLogin(Role role)
+		public UserLogin(String role)
 		{
 			this();
 			this.role = role;
@@ -60,12 +59,12 @@ public abstract class UserLogin implements Serializable {
 			super();
 		}
 
-		public String getId()
+		public int getId()
 		{
 			return id;
 		}
 
-		public void setId(String id)
+		public void setId(int id)
 		{
 			this.id = id;
 		}
@@ -86,11 +85,11 @@ public abstract class UserLogin implements Serializable {
 			this.userName = userName;
 		}
 
-		public Role getRole() {
+		public String getRole() {
 			return role;
 		}
 
-		public void setRole(Role role) {
+		public void setRole(String role) {
 			this.role = role;
 		}
 

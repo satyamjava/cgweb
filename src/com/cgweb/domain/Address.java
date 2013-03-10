@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ADDRESS")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Address implements Serializable {
+public class Address implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -37,19 +37,19 @@ public abstract class Address implements Serializable {
 		private String city;
 
 		@Column(name = "STREET")
-		private long street;
+		private String street;
 		
 		@Column(name = "PHONE")
-		private long phone;
+		private String phone;
 		
 		@Column(name = "FAX")
-		private long fax;
+		private String fax;
 
 		@Column(name = "STATE")
 		private String state;
 		
 		@Column(name = "ZIP")
-		private char zip;
+		private String zip;
 		
 		public Address(String address_line1, String city, String state)
 		{
@@ -104,27 +104,27 @@ public abstract class Address implements Serializable {
 			this.city = city;
 		}
 
-		public long getStreet() {
+		public String getStreet() {
 			return street;
 		}
 
-		public void setStreet(long street) {
+		public void setStreet(String street) {
 			this.street = street;
 		}
 
-		public long getPhone() {
+		public String getPhone() {
 			return phone;
 		}
 
-		public void setPhone(long phone) {
+		public void setPhone(String phone) {
 			this.phone = phone;
 		}
 
-		public long getFax() {
+		public String getFax() {
 			return fax;
 		}
 
-		public void setFax(long fax) {
+		public void setFax(String fax) {
 			this.fax = fax;
 		}
 
@@ -136,11 +136,11 @@ public abstract class Address implements Serializable {
 			this.state = state;
 		}
 
-		public char getZip() {
+		public String getZip() {
 			return zip;
 		}
 
-		public void setZip(char zip) {
+		public void setZip(String zip) {
 			this.zip = zip;
 		}
 }
