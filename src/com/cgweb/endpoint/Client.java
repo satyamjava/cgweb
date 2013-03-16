@@ -45,7 +45,7 @@ public class Client {
 			"<emailId>1</emailId>" +
 			"<gender>1</gender>" +
 			"<userId>3</userId>" +
-			"<contactListId>1</contactListId>" +
+			"<contactListId>999</contactListId>" +
 			"<designation>1</designation>" +
 			"<addressLine1>1</addressLine1>" +
 			"<addressLine2>1</addressLine2>" +
@@ -56,9 +56,30 @@ public class Client {
 			"<state>1</state>" +
 			"<zip>1</zip>" +
             "</userRegisterOrUpdateRequest>";
+    
+    private static String REGISTERCOMPANYMESSAGE =
+            "<companyRegisterOrUpdateRequest" +
+            " xmlns=" +
+            "\"http://www.springwscgweb.org/types\">" +
+            "<companyName>1</companyName>" +
+			"<establishmentYear>1</establishmentYear>" +
+			"<websiteAdd>1</websiteAdd>" +
+			"<companyDescription>1</companyDescription>" +
+			"<contactNumber>1</contactNumber>" +
+			"<emailId>1</emailId>" +
+			"<companyId>hcl</companyId>" +
+			"<addressLine1>1</addressLine1>" +
+			"<addressLine2>1</addressLine2>" +
+			"<city>1</city>" +
+			"<street>1</street>" +
+			"<phone>177777</phone>" +
+			"<fax>9990</fax>" +
+			"<state>1</state>" +
+			"<zip>1</zip>" +
+            "</companyRegisterOrUpdateRequest>";
 
     public static void main(String[] args){
-        StreamSource source = new StreamSource(new StringReader(CHANGEPASSWORDMESSAGE));
+        StreamSource source = new StreamSource(new StringReader(ALLUSERSMESSAGE));
         StreamResult result = new StreamResult(System.out);
         System.out.println("source"+source+"\nAfter source and result	"+result);
 //WebServiceTemplate provides the functionality for sending and receiving webservice messages. 

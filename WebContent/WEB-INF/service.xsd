@@ -1,6 +1,7 @@
 <xs:schema attributeFormDefault="unqualified" 
 			elementFormDefault="qualified" 
 			xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+			xmlns="http://www.w3.org/2001/XMLSchema" 
 			targetNamespace="http://www.springwscgweb.org/types">
 			
   <xs:element name="loginRequest">
@@ -106,12 +107,10 @@
         <xs:element type="xs:string" name="establishmentYear"/>
         <xs:element type="xs:string" name="websiteAdd"/>
         <xs:element type="xs:string" name="companyDescription"/>
-        <xs:element type="xs:string" name="primaryContactNumber"/>
-        <xs:element type="xs:string" name="secondaryContactNumber"/>
         <xs:element type="xs:string" name="contactNumber"/>
         <xs:element type="xs:string" name="emailId"/>
         <xs:element type="xs:string" name="companyId"/>
-        <xs:element type="xs:string" name="designation"/>
+        <xs:element type="xs:string" name="addressLine1"/>
         <xs:element type="xs:string" name="addressLine2"/>
         <xs:element type="xs:string" name="city"/>
         <xs:element type="xs:string" name="street"/>
@@ -127,7 +126,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element type="xs:string" name="message"/>
-        <xs:element type="xs:string" name="firstName"/>
+        <xs:element type="xs:string" name="companyName"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -173,36 +172,93 @@
     </xs:complexType>
   </xs:element>
   
-  <xs:element name="fetchAllUserDataResponse">
+ 
+ <xs:element name="fetchAllUserDataResponse">
     <xs:complexType>
-     <xs:sequence>
-     <xs:element name="user" maxOccurs="unbounded">
-    <xs:complexType>
-     <xs:sequence>
-        <xs:element type="xs:string" name="firstName"/>
-        <xs:element type="xs:string" name="middleName"/>
-        <xs:element type="xs:string" name="lastName"/>
-        <xs:element type="xs:string" name="primaryContactNumber"/>
-        <xs:element type="xs:string" name="secondaryContactNumber"/>
-        <xs:element type="xs:string" name="contactNumber"/>
-        <xs:element type="xs:string" name="emailId"/>
-        <xs:element type="xs:string" name="gender"/>
-        <xs:element type="xs:string" name="userId"/>
-        <xs:element type="xs:string" name="contactListId"/>
-        <xs:element type="xs:string" name="designation"/>
-        <xs:element type="xs:string" name="addressLine1"/>
-        <xs:element type="xs:string" name="addressLine2"/>
-        <xs:element type="xs:string" name="city"/>
-        <xs:element type="xs:string" name="street"/>
-        <xs:element type="xs:string" name="phone"/>
-        <xs:element type="xs:string" name="fax"/>
-        <xs:element type="xs:string" name="state"/>
-        <xs:element type="xs:string" name="zip"/>
-        </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+	     <xs:sequence>
+	     <xs:element name="UserData"  minOccurs="0" maxOccurs="unbounded">
+			<xs:complexType>
+				<xs:sequence>
+			        <xs:element type="xs:string" name="firstName"/>
+			        <xs:element type="xs:string" name="middleName"/>
+			        <xs:element type="xs:string" name="lastName"/>
+			        <xs:element type="xs:string" name="primaryContactNumber"/>
+			        <xs:element type="xs:string" name="secondaryContactNumber"/>
+			        <xs:element type="xs:string" name="contactNumber"/>
+			        <xs:element type="xs:string" name="emailId"/>
+			        <xs:element type="xs:string" name="gender"/>
+			        <xs:element type="xs:string" name="userId"/>
+			        <xs:element type="xs:string" name="contactListId"/>
+			        <xs:element type="xs:string" name="designation"/>
+			        <xs:element type="xs:string" name="addressLine1"/>
+			        <xs:element type="xs:string" name="addressLine2"/>
+			        <xs:element type="xs:string" name="city"/>
+			        <xs:element type="xs:string" name="street"/>
+			        <xs:element type="xs:string" name="phone"/>
+			        <xs:element type="xs:string" name="fax"/>
+			        <xs:element type="xs:string" name="state"/>
+			        <xs:element type="xs:string" name="zip"/>
+	        	</xs:sequence>
+			</xs:complexType>
+		</xs:element> 
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+
+   </xs:schema> 
   
-</xs:schema>
+ <!-- 
+   <xs:element name="fetchAllUserDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="user"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="user">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="firstName"/>
+        <xs:element ref="middleName"/>
+        <xs:element ref="lastName"/>
+        <xs:element ref="primaryContactNumber"/>
+        <xs:element ref="secondaryContactNumber"/>
+        <xs:element ref="contactNumber"/>
+        <xs:element ref="emailId"/>
+        <xs:element ref="gender"/>
+        <xs:element ref="userId"/>
+        <xs:element ref="contactListId"/>
+        <xs:element ref="designation"/>
+        <xs:element ref="addressLine1"/>
+        <xs:element ref="addressLine2"/>
+        <xs:element ref="city"/>
+        <xs:element ref="street"/>
+        <xs:element ref="phone"/>
+        <xs:element ref="fax"/>
+        <xs:element ref="state"/>
+        <xs:element ref="zip"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="firstName" type="xs:string"/>
+  <xs:element name="middleName" type="xs:string"/>
+  <xs:element name="lastName" type="xs:string"/>
+  <xs:element name="primaryContactNumber" type="xs:string"/>
+  <xs:element name="secondaryContactNumber" type="xs:string"/>
+  <xs:element name="contactNumber" type="xs:string"/>
+  <xs:element name="emailId" type="xs:string"/>
+  <xs:element name="gender" type="xs:string"/>
+  <xs:element name="userId" type="xs:string"/>
+  <xs:element name="contactListId" type="xs:string"/>
+  <xs:element name="designation" type="xs:string"/>
+  <xs:element name="addressLine1" type="xs:string"/>
+  <xs:element name="addressLine2" type="xs:string"/>
+  <xs:element name="city" type="xs:string"/>
+  <xs:element name="street" type="xs:string"/>
+  <xs:element name="phone" type="xs:string"/>
+  <xs:element name="fax" type="xs:string"/>
+  <xs:element name="state" type="xs:string"/>
+  <xs:element name="zip" type="xs:string"/>
+  -->
+
+

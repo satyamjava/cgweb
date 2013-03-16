@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cgweb.domain.CompanyInfo;
 import com.cgweb.domain.UserInfo;
 import com.cgweb.domain.UserLogin;
 
@@ -172,8 +173,30 @@ newInstance.setFirstName("Peter4");
 	@Transactional(propagation = Propagation.REQUIRED)
 	public String insertUserInfo(UserInfo userInfo) {
 		System.out.println("UserRepositoryImpl.insertUserInfo(): Entering:"+userInfo);
+		
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery <UserInfo> criteriaQuery = criteriaBuilder.createQuery(UserInfo.class);
+		Root from;
+		from = criteriaQuery.from(UserInfo.class);
+		criteriaQuery.where(criteriaBuilder.equal(from.get("emailId"), userInfo.getEmailId()));
+		CriteriaQuery <UserInfo> select = criteriaQuery.select(from);
+		TypedQuery <UserInfo> typedQuery = entityManager.createQuery(select);
+		List <UserInfo> resultList = typedQuery.getResultList();
+		
+		//UserInfo user = entityManager.find(UserInfo.class, userInfo.getEmailId());
+		if(resultList.size() >= 1) {
+			System.out.println("MERGING....");
+			userInfo.setId(resultList.iterator().next().getId());
+			System.out.println("UserRepositoryImpl.insertuserInfo():userInfo.setId:"+userInfo.getId());
+			entityManager.merge(userInfo);
+		}
+		
+		else {
+			System.out.println("PERSISTING....");
+			entityManager.persist(userInfo);
+		}
 		//entityManager.getTransaction().begin();
-		entityManager.persist(userInfo);
+		
 		//entityManager.getTransaction().commit();
 		//System.out.println("UserRepositoryImpl.getUserInfo() resultList: "+resultList);
 		System.out.println("UserRepositoryImpl.insertUserInfo(): About to return null");
@@ -183,5 +206,44 @@ newInstance.setFirstName("Peter4");
 		   exception.printStackTrace();
 		  }
 		  return String.valueOf(userInfo.getId());
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED)
+	public String insertCompanyInfo(CompanyInfo companyInfo) {
+		System.out.println("UserRepositoryImpl.insertcompanyInfo(): Entering:"+companyInfo);
+		
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery <CompanyInfo> criteriaQuery = criteriaBuilder.createQuery(CompanyInfo.class);
+		Root from;
+		from = criteriaQuery.from(CompanyInfo.class);
+		criteriaQuery.where(criteriaBuilder.equal(from.get("companyId"), companyInfo.getCompanyId()));
+		CriteriaQuery <CompanyInfo> select = criteriaQuery.select(from);
+		TypedQuery <CompanyInfo> typedQuery = entityManager.createQuery(select);
+		List <CompanyInfo> resultList = typedQuery.getResultList();
+		
+		//UserInfo user = entityManager.find(UserInfo.class, userInfo.getEmailId());
+		System.out.println("UserRepositoryImpl.insertCompanyInfo():resultList:"+resultList.size());
+		if(resultList.size() >= 1) {
+			System.out.println("MERGING....");
+			companyInfo.setId(resultList.iterator().next().getId());
+			System.out.println("UserRepositoryImpl.insertCompanyInfo():companyInfo.setId:"+companyInfo.getId());
+			entityManager.merge(companyInfo);
+		}
+		
+		else {
+			System.out.println("PERSISTING....");
+			entityManager.persist(companyInfo);
+		}
+		//entityManager.getTransaction().begin();
+		
+		//entityManager.getTransaction().commit();
+		//System.out.println("UserRepositoryImpl.getUserInfo() resultList: "+resultList);
+		System.out.println("UserRepositoryImpl.insertCompanyInfo(): About to return");
+		try {
+			entityManager.flush();
+		  } catch (Exception exception) {
+		   exception.printStackTrace();
+		  }
+		  return String.valueOf(companyInfo.getId());
 	}
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.cgweb.dao.UserRepository;
 import com.cgweb.dao.UserRepositoryImpl;
+import com.cgweb.domain.CompanyInfo;
 import com.cgweb.domain.UserInfo;
 
 /**
@@ -52,6 +53,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String insertUserInfo(UserInfo userInfo) {
 		return userRepository.insertUserInfo(userInfo);
+	}
+
+	@Override
+	public String insertCompanyInfo(CompanyInfo companyInfo) {
+		return userRepository.insertCompanyInfo(companyInfo);
 	}
 	
 	

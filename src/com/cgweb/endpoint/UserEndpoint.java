@@ -16,6 +16,7 @@ import org.w3c.dom.Element;
 
 import com.cgeweb.utils.CgwebUtils;
 import com.cgweb.domain.Address;
+import com.cgweb.domain.CompanyInfo;
 import com.cgweb.domain.UserInfo;
 import com.cgweb.service.UserService;
 import com.cgweb.service.UserServiceImpl;
@@ -124,8 +125,8 @@ public class UserEndpoint {
             	
     	if(allUserInfo != null && allUserInfo.size() > 0)
     	{
-    		for(int i=0; i<=allUserInfo.size();i++) {
-    			response.appendChild(document.createElementNS(NAMESPACE, "user"));
+    		for(int i=0; i<allUserInfo.size();i++) {
+    			//response.appendChild(document.createElementNS(NAMESPACE, "user"));
     			System.out.println("UserEndpoint.getAllUsers() allUsersInfo :"+allUserInfo.get(i).getFirstName()
     					+" allUsersInfo.getMiddleName():"+allUserInfo.get(i).getMiddleName()
     					+" allUsersInfo.getLastName():"+allUserInfo.get(i).getLastName()
@@ -165,8 +166,8 @@ public class UserEndpoint {
     	else
     	{
     		firstName = "User Not Found";
-    		response.appendChild(addElementWithValue(document, "first_name", firstName));
-            response.appendChild(addElementWithValue(document, "last_name", "2"));
+    		response.appendChild(addElementWithValue(document, "firstName", firstName));
+            response.appendChild(addElementWithValue(document, "middleName", "2"));
     	}
     	System.out.println("response:"+response);
         return response;
@@ -247,6 +248,78 @@ public class UserEndpoint {
     		firstName = "User Not Found";
     		response.appendChild(addElementWithValue(document, "message", "FAILED"));
             response.appendChild(addElementWithValue(document, "firstName", "firstName"));
+    	}
+    	System.out.println("response:"+response);
+        return response;
+    }
+    
+    
+    @PayloadRoot(localPart = "companyRegisterOrUpdateRequest",namespace = "http://www.springwscgweb.org/types")
+    @ResponsePayload
+    public Element registerCompany(@RequestPayload Element request) throws ParserConfigurationException {
+    	System.out.println("hitting companyRegisterOrUpdateRequest");
+    	
+/*    	String[] userInfoArray = new String[]{"firstName","middleName","lastName","primaryContactNumber","secondaryContactNumber",
+    			"contactNumber","emailId","gender","userId","contactListId","designation","addressLine1","addressLine2",
+    			"city","street","phone","fax","state","zip"};*/
+    	
+    
+    	String companyName = request.getChildNodes().item(0).getTextContent();
+		String establishmentYear = request.getChildNodes().item(1).getTextContent();
+		String websiteAdd = request.getChildNodes().item(2).getTextContent();
+		String companyDescription = request.getChildNodes().item(3).getTextContent();
+		String contactNumber = request.getChildNodes().item(4).getTextContent();
+		String emailId = request.getChildNodes().item(5).getTextContent();
+		String companyId =request.getChildNodes().item(6).getTextContent();
+		String addressLine1 = request.getChildNodes().item(7).getTextContent();
+		String addressLine2 = request.getChildNodes().item(8).getTextContent();
+		String city = request.getChildNodes().item(9).getTextContent();
+		String street = request.getChildNodes().item(10).getTextContent();
+		String phone = request.getChildNodes().item(12).getTextContent();
+		String fax = request.getChildNodes().item(11).getTextContent();
+		String state = request.getChildNodes().item(13).getTextContent();
+		String zip = request.getChildNodes().item(14).getTextContent();
+		
+		Address address = new Address();
+		address.setAddressLine1(addressLine1);
+		address.setAddressLine2(addressLine2);
+		address.setCity(city);
+		address.setFax(fax);
+		address.setPhone(phone);
+		address.setState(state);
+		address.setState(state);
+		address.setStreet(street);
+		address.setZip(zip);
+		
+		CompanyInfo companyInfo = new CompanyInfo();
+    	companyInfo.setCompanyName(companyName);
+    	companyInfo.setEstablishmentYear(establishmentYear);
+    	companyInfo.setWebsiteAdd(websiteAdd);
+    	companyInfo.setCompanyDescription(companyDescription);
+    	companyInfo.setContactNumber(contactNumber);
+    	companyInfo.setEmailId(emailId);
+    	companyInfo.setCompanyId(companyId);
+    	companyInfo.setAddress(address);
+    	//userInfo.setId(userId);
+    	
+    	
+    	String result = userService.insertCompanyInfo(companyInfo);
+    	System.out.println("UserEndpoint.registerCompany() result :"+ result);
+
+    	Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+        Element response = document.createElementNS(NAMESPACE, "companyRegisterOrUpdateResponse");
+            	
+        if(result != null)
+    	{
+    		System.out.println("UserEndpoint.registerCompany() result :"+result);
+    		response.appendChild(addElementWithValue(document, "message", "SUCCESS"));
+            response.appendChild(addElementWithValue(document, "companyName", companyName));
+    	}
+    	else
+    	{
+    		companyName = "User Not Found";
+    		response.appendChild(addElementWithValue(document, "message", "FAILED"));
+            response.appendChild(addElementWithValue(document, "companyName", companyName));
     	}
     	System.out.println("response:"+response);
         return response;
